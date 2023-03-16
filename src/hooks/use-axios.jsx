@@ -1,0 +1,31 @@
+import axios from "axios";
+import { useState } from "react";
+import { BACKEND_URL } from '../config/constants'
+
+
+export default function useAxios() {
+    const [data, setData] = useState(null)
+    const [error, setError] = useState(null)
+    const [loading, setLoading] = useState(true)
+
+    const operation = async (path, method, body = null) => {
+        try {
+            setLoading(true)
+            const response = await axios.request({
+                method: method,
+                baseURL: 'https://reqres.in/api',
+                url: path,
+                data: body
+            })
+
+            setData(response.data)
+
+        } catch (e) {
+            setError(e)
+        } finally {
+            setLoading(false)
+        }
+    }
+
+    return { data, error, loading, operation }
+}
