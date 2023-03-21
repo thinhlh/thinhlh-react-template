@@ -13,7 +13,7 @@ export default function useAxios() {
             setLoading(true)
             const response = await axios.request({
                 method: method,
-                baseURL: 'https://reqres.in/api',
+                baseURL: BACKEND_URL,
                 url: path,
                 data: body
             })
